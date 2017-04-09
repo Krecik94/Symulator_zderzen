@@ -19,6 +19,7 @@ public class drawingPanel extends javax.swing.JPanel{
         
         super.paintComponent(g); // Do the original draw
         Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(new java.awt.Color(0,0,255) );
         g2.fillOval(10, 10, 100, 100);
     }
     
