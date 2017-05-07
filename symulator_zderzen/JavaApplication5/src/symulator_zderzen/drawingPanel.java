@@ -7,15 +7,17 @@ package symulator_zderzen;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import org.jbox2d.common.Vec2;
 
 /**
  *
  * @author Marcin2
  */
 public class drawingPanel extends javax.swing.JPanel{
-    private int x;
-    private int y;
-    private int z;
+    private int x1;
+    private int y1;
+    private int x2;
+    private int y2;
     
     @Override
     public void paintComponent(Graphics g) {
@@ -23,23 +25,38 @@ public class drawingPanel extends javax.swing.JPanel{
         super.paintComponent(g); // Do the original draw
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new java.awt.Color(0,0,255) );
-        g2.fillOval(x, y, 100, 100);
-        g2.fillOval(500,y,100,100);
+        g2.fillOval(x1, y1, 100, 100);
+        g2.fillOval(x2,y2,100,100);
     }
     
     public drawingPanel(){
-        x=100;
-        y=150;
-        ;
+        x1=100;
+        y1=150;
+        x2=300;
+        y2=150;
+        
     }
     
-    public void setPosition(int argX, int argY){
-        x=argX;
-        y=argY;
+    public void setPosition1(int argX, int argY){
+        x1=argX;
+        y1=argY;
+        revalidate();
+        repaint();
+    }
+    
+    public void setPosition2(int argX, int argY){
+        x2=argX;
+        y2=argY;
         revalidate();
         repaint();
     }
     
     
+    public Vec2 getPanelSize(){
+        Vec2 returnVector = new Vec2();
+        returnVector.x= this.getSize().width;
+        returnVector.y= this.getSize().height;
+        return returnVector;
+    }
     
 }

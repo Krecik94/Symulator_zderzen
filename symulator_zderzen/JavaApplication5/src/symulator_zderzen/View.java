@@ -5,6 +5,8 @@
  */
 package symulator_zderzen;
 
+import org.jbox2d.common.Vec2;
+
 /**
  *
  * @author Marcin2
@@ -126,10 +128,21 @@ public class View extends javax.swing.JFrame {
         myController.stopSimulation();
     }//GEN-LAST:event_jButton3ActionPerformed
     
-    public void setBallPosition(int x, int y){
-        drawingPanel1.setPosition(x, y);
+    public void setBall1Position(int x, int y){
+        drawingPanel1.setPosition1(x, y);
         
     }
+    
+    public void setBall2Position(int x, int y){
+        drawingPanel1.setPosition2(x, y);
+        
+    }
+    
+    public Vec2 getDrawingPanelSize(){
+    return drawingPanel1.getPanelSize();
+    }
+        
+    
     
     /**
      * @param args the command line arguments
