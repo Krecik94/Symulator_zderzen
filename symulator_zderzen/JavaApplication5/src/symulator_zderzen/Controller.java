@@ -9,6 +9,7 @@ package symulator_zderzen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.Body;
@@ -31,24 +32,55 @@ public class Controller {
     private Body body;
     private Timer testTimer;
     private float RATIO = 100.0f;
+    private Body ball;
     
     
     
     public Controller() {
+        
+//creating world in jbox2d
         currentView = new View(this);
         Vec2  gravity = new Vec2(0,10);
         world = new World(gravity);
+        
+       //creating a body in jbox2d
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyType.DYNAMIC;
-        bodyDef.position.set(1, 1);
+        bodyDef.position.set(1, 1.5f );
         body = world.createBody(bodyDef);
-        PolygonShape dynamicBox = new PolygonShape();
-        dynamicBox.setAsBox(1, 1);
+        CircleShape cs = new CircleShape();
+        cs.m_radius = 0.5f;  
         FixtureDef fixtureDef = new FixtureDef();
-        fixtureDef.shape = dynamicBox;
+        fixtureDef.shape = cs;
         fixtureDef.density = 1;
         fixtureDef.friction = 0.3f;
         body.createFixture(fixtureDef);
+        // add force to the 1. body
+          /* Body body = (Body)ball.getUserData();
+Vec2 force  = new Vec2(0, 150.0f);
+Vec2 point = body.getWorldPoint(body.getWorldCenter());
+body.applyForce(force ,point);*/
+        
+        //creating the 2nd object 
+        BodyDef ball2 = new BodyDef();
+        ball2.type =BodyType.DYNAMIC;
+        ball2.position.set(3,3);
+        CircleShape ballShape = new CircleShape();
+        ballShape.m_radius = 0.5f;  
+        FixtureDef fd = new FixtureDef();
+        fd.shape = cs;
+        fd.density = 0.1f;
+        fd.friction = 0.3f;        
+       
+        //add impulse to the 2. object 
+       /* Body ballImpulse = (Body)ball.getUserData();
+        Vec2 impulse  = new Vec2(0, 50.0f);
+        Vec2 center = body.getWorldPoint(body.getWorldCenter());
+        body. applyLinearImpulse (force ,point);*/
+       
+
+        
+        
         
         ActionListener listener = new ActionListener(){
         public void actionPerformed(ActionEvent event){

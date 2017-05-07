@@ -15,7 +15,7 @@ import java.awt.Graphics2D;
 public class drawingPanel extends javax.swing.JPanel{
     private int x;
     private int y;
-    
+    private int z;
     
     @Override
     public void paintComponent(Graphics g) {
@@ -24,11 +24,13 @@ public class drawingPanel extends javax.swing.JPanel{
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new java.awt.Color(0,0,255) );
         g2.fillOval(x, y, 100, 100);
+        g2.fillOval(500,y,100,100);
     }
     
     public drawingPanel(){
-        x=0;
-        y=0;
+        x=100;
+        y=150;
+        ;
     }
     
     public void setPosition(int argX, int argY){
