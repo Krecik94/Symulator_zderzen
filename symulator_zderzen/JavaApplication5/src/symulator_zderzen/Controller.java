@@ -40,7 +40,7 @@ public class Controller {
         
 //creating world in jbox2d
         currentView = new View(this);
-        Vec2  gravity = new Vec2(0,10);
+        Vec2  gravity = new Vec2(0,0);
         world = new World(gravity);
         
        //creating a body in jbox2d
@@ -56,10 +56,10 @@ public class Controller {
         fixtureDef.friction = 0.3f;
         ball1.createFixture(fixtureDef);
         // add force to the 1. body
-          /* Body body = (Body)ball.getUserData();
-Vec2 force  = new Vec2(0, 150.0f);
-Vec2 point = body.getWorldPoint(body.getWorldCenter());
-body.applyForce(force ,point);*/
+       /*   Body body = (Body)ball1.getUserData();
+    Vec2 force  = new Vec2(0, 150.0f);
+    Vec2 point = body.getWorldPoint(body.getWorldCenter());
+    body.applyForce(force ,point);*/
         
         //creating the 2nd object 
         bodyDef = new BodyDef();
@@ -75,11 +75,10 @@ body.applyForce(force ,point);*/
         fd.friction = 0.3f;        
        
         //add impulse to the 2. object 
-       /* Body ballImpulse = (Body)ball.getUserData();
+      /* Body ballImpulse = (Body)ball2.getUserData();
         Vec2 impulse  = new Vec2(0, 50.0f);
         Vec2 center = body.getWorldPoint(body.getWorldCenter());
-        body. applyLinearImpulse (force ,point);*/
-       
+        body. applyLinearImpulse (force ,point);    */   
 
         
         
@@ -119,8 +118,9 @@ body.applyForce(force ,point);*/
         System.err.println("Simulation stopped");
         testTimer.stop();
     }
-    public void setBall1PositionX(float xArg){
+    public void setBall1PositionX(float xArg ){
         ball1.setTransform(new Vec2(xArg,ball1.getPosition().y), ball1.getAngle());
+        
     }
     
     
