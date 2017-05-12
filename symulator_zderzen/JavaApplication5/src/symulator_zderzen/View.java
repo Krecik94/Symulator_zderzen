@@ -5,6 +5,8 @@
  */
 package symulator_zderzen;
 
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import org.jbox2d.common.Vec2;
 
 /**
@@ -19,6 +21,17 @@ public class View extends javax.swing.JFrame {
     public View(Controller paramController) {
         myController=paramController;
         initComponents();
+        jSlider1.setMaximum((int)drawingPanel1.getPanelSize().x);
+        jSlider2.setMaximum((int)drawingPanel1.getPanelSize().y);
+        jSlider3.setMaximum((int)drawingPanel1.getPanelSize().x);
+        jSlider4.setMaximum((int)drawingPanel1.getPanelSize().y);
+        
+        drawingPanel1.addComponentListener(new ComponentAdapter() {
+            public void componentResized(ComponentEvent e) {
+                // This is only called when the user releases the mouse button.
+                rescaleSliders();
+            }
+        });
     }
 
     /**
@@ -87,6 +100,12 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSlider2StateChanged(evt);
+            }
+        });
+
         jLabel3.setText("Ball1 posX");
 
         jLabel4.setText("Ball1 posY");
@@ -131,10 +150,10 @@ public class View extends javax.swing.JFrame {
                         .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(44, 44, 44)
                 .addComponent(drawingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -160,9 +179,9 @@ public class View extends javax.swing.JFrame {
                 .addComponent(jSlider3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSlider4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
+                .addGap(48, 48, 48)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,7 +214,15 @@ public class View extends javax.swing.JFrame {
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         // TODO add your handling code here:
         int value= jSlider1.getValue();
+        System.err.println(value);
+        myController.setBall1PositionX(value);
     }//GEN-LAST:event_jSlider1StateChanged
+
+    private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
+        // TODO add your handling code here:
+        int value= jSlider2.getValue();
+        myController.setBall1PositionY(value);
+    }//GEN-LAST:event_jSlider2StateChanged
     
     public void setBall1Position(int x, int y){
         drawingPanel1.setPosition1(x, y);
@@ -211,7 +238,12 @@ public class View extends javax.swing.JFrame {
     return drawingPanel1.getPanelSize();
     }
         
-    
+    public void rescaleSliders(){
+        jSlider1.setMaximum((int)drawingPanel1.getPanelSize().x);
+        jSlider2.setMaximum((int)drawingPanel1.getPanelSize().y);
+        jSlider3.setMaximum((int)drawingPanel1.getPanelSize().x);
+        jSlider4.setMaximum((int)drawingPanel1.getPanelSize().y);
+    }
     
     /**
      * @param args the command line arguments
