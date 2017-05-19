@@ -159,6 +159,7 @@ public class Controller {
     }
 
     public void setRestitution(float restitution) {
+        System.err.println(restitution);
         (ball1.getFixtureList()).m_restitution = restitution;
         (ball2.getFixtureList()).m_restitution = restitution;
         ball1.resetMassData();

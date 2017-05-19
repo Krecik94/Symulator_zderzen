@@ -29,7 +29,10 @@ public class View extends javax.swing.JFrame {
         jSlider2.setMinimum((int) (25));
         jSlider3.setMinimum((int) (25));
         jSlider4.setMinimum((int) (25));
-
+        
+        jSlider5.setMinimum(0);
+        jSlider5.setMaximum(100);
+        
         drawingPanel1.addComponentListener(new ComponentAdapter() {
             public void componentResized(ComponentEvent e) {
                 // This is only called when the user releases the mouse button.
@@ -383,6 +386,8 @@ public class View extends javax.swing.JFrame {
 
     private void jSlider5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider5StateChanged
         // TODO add your handling code here:
+        float value = jSlider5.getValue();
+        myController.setRestitution(value/100);
     }//GEN-LAST:event_jSlider5StateChanged
 
     private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
