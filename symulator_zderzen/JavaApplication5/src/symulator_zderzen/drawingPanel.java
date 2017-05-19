@@ -28,7 +28,7 @@ public class drawingPanel extends javax.swing.JPanel{
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(new java.awt.Color(0,50,200) );
         g2.fillOval(x1-25, y1-25, 100, 100);
-        g2.setColor(new java.awt.Color(110,50,200) );
+        g2.setColor(new java.awt.Color(255,0,0) );
         g2.fillOval(x2-25,y2-25,100,100);
     }
     

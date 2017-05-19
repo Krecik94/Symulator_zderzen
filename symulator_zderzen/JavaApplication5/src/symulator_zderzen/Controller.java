@@ -29,7 +29,7 @@ public class Controller {
     private int velocityIterations = 6;
     private int positionIterations = 2;
     private Body ball1;
-    private Timer testTimer;
+    public Timer testTimer;
     private float RATIO = 100.0f;
     private Body ball2;
 
@@ -50,13 +50,9 @@ public class Controller {
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = cs;
         fixtureDef.density = 1;
-        fixtureDef.friction = 0.3f;
+        fixtureDef.friction = 0f;
+        fixtureDef.restitution = 0;
         ball1.createFixture(fixtureDef);
-        // add force to the 1. body
-        /*   Body body = (Body)ball1.getUserData();
-    Vec2 force  = new Vec2(0, 150.0f);
-    Vec2 point = body.getWorldPoint(body.getWorldCenter());
-    body.applyForce(force ,point);*/
 
         //creating the 2nd object 
         bodyDef = new BodyDef();
@@ -68,14 +64,12 @@ public class Controller {
         ballShape.m_radius = 0.5f;
         FixtureDef fd = new FixtureDef();
         fd.shape = ballShape;
-        fd.density = 2.f;
-        fd.friction = 0.3f;
+        fd.density = 1.f;
+        fd.friction = 0f;
+        fd.restitution = 0;
         ball2.createFixture(fd);
-        //add impulse to the 2. object 
-        /* Body ballImpulse = (Body)ball2.getUserData();
-        Vec2 impulse  = new Vec2(0, 50.0f);
-        Vec2 center = body.getWorldPoint(body.getWorldCenter());
-        body. applyLinearImpulse (force ,point);    */
+
+        // body. applyLinearImpulse (force ,point);    
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 executeStep();
@@ -89,12 +83,10 @@ public class Controller {
                 currentView.setVisible(true);
             }
         });
-        
+
         ball1.setActive(true);
         ball2.setActive(true);
-        //ball1.applyForceToCenter(new Vec2(100,0));
-        ball1.setLinearVelocity(new Vec2(2,0));
-        ball2.setLinearVelocity(new Vec2(-2,0));
+
     }
 
     public void executeStep() {
@@ -118,17 +110,58 @@ public class Controller {
 
     public void setBall1PositionX(float xArg) {
         if (ball1 != null) {
-            ball1.setTransform(new Vec2(xArg/RATIO, ball1.getPosition().y), ball1.getAngle());
-            Vec2 position1 = ball1.getPosition();
-            currentView.setBall1Position((int) (position1.x * RATIO), (int) (position1.y * RATIO));
-        }
-    }
-    public void setBall1PositionY(float yArg) {
-        if (ball1 != null) {
-            ball1.setTransform(new Vec2(ball1.getPosition().x, yArg/RATIO), ball1.getAngle());
+            ball1.setTransform(new Vec2(xArg / RATIO, ball1.getPosition().y), ball1.getAngle());
             Vec2 position1 = ball1.getPosition();
             currentView.setBall1Position((int) (position1.x * RATIO), (int) (position1.y * RATIO));
         }
     }
 
+    public void setBall1PositionY(float yArg) {
+        if (ball1 != null) {
+            ball1.setTransform(new Vec2(ball1.getPosition().x, yArg / RATIO), ball1.getAngle());
+            Vec2 position1 = ball1.getPosition();
+            currentView.setBall1Position((int) (position1.x * RATIO), (int) (position1.y * RATIO));
+        }
+    }
+
+    public void setBall2PositionX(float xArg) {
+        if (ball2 != null) {
+            ball2.setTransform(new Vec2(xArg / RATIO, ball1.getPosition().y), ball2.getAngle());
+            Vec2 position1 = ball2.getPosition();
+            currentView.setBall2Position((int) (position1.x * RATIO), (int) (position1.y * RATIO));
+        }
+    }
+
+    public void setBall2PositionY(float yArg) {
+        if (ball2 != null) {
+            ball2.setTransform(new Vec2(ball2.getPosition().x, yArg / RATIO), ball2.getAngle());
+            Vec2 position1 = ball2.getPosition();
+            currentView.setBall2Position((int) (position1.x * RATIO), (int) (position1.y * RATIO));
+        }
+    }
+
+    public void setBall1weight(int mass) {
+        (ball1.getFixtureList()).m_density = mass;
+        ball1.resetMassData();
+    }
+
+    public void setBall2weight(int mass) {
+        (ball2.getFixtureList()).m_density = mass;
+        ball2.resetMassData();
+    }
+
+    public void setBall1xVelocity(int velocity) {
+        ball1.setLinearVelocity(new Vec2(velocity, 0));
+    }
+
+    public void setBall2xVelocity(int velocity) {
+        ball2.setLinearVelocity(new Vec2(velocity, 0));
+    }
+
+    public void setRestitution(float restitution) {
+        (ball1.getFixtureList()).m_restitution = restitution;
+        (ball2.getFixtureList()).m_restitution = restitution;
+        ball1.resetMassData();
+        ball2.resetMassData();
+    }
 }
