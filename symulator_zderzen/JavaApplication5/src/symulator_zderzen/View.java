@@ -21,11 +21,11 @@ public class View extends javax.swing.JFrame {
     public View(Controller paramController) {
         myController = paramController;
         initComponents();
-        jSlider1.setMaximum((int) (drawingPanel1.getPanelSize().x)-75);
-        jSlider2.setMaximum((int) drawingPanel1.getPanelSize().y-75);
-        jSlider3.setMaximum((int) drawingPanel1.getPanelSize().x-75);
-        jSlider4.setMaximum((int) drawingPanel1.getPanelSize().y-75);
-         jSlider1.setMinimum((int) (25));
+        jSlider1.setMaximum((int) (drawingPanel1.getPanelSize().x) - 75);
+        jSlider2.setMaximum((int) drawingPanel1.getPanelSize().y - 75);
+        jSlider3.setMaximum((int) drawingPanel1.getPanelSize().x - 75);
+        jSlider4.setMaximum((int) drawingPanel1.getPanelSize().y - 75);
+        jSlider1.setMinimum((int) (25));
         jSlider2.setMinimum((int) (25));
         jSlider3.setMinimum((int) (25));
         jSlider4.setMinimum((int) (25));
@@ -38,8 +38,10 @@ public class View extends javax.swing.JFrame {
         });
         jSlider1.setValue(100);
         jSlider2.setValue(150);
-        jSlider3.setValue((int)(this.getDrawingPanelSize().x * 2) / (300));
+        jSlider3.setValue((int) (this.getDrawingPanelSize().x * 200) / (300));
         jSlider4.setValue(150);
+        drawingPanel1.setPosition1(100, 150);
+        drawingPanel1.setPosition2((int) (this.getDrawingPanelSize().x * 200) / (300), 150);
     }
 
     /**
@@ -86,6 +88,12 @@ public class View extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner1StateChanged(evt);
+            }
+        });
 
         drawingPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -302,6 +310,10 @@ public class View extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int value = (Integer) jSpinner1.getValue();
+        myController.setBall1xVelocity(value);
+        value = (Integer) jSpinner3.getValue();
+        myController.setBall2xVelocity(value);
         myController.startSimulation();
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -346,7 +358,7 @@ public class View extends javax.swing.JFrame {
     private void jSpinner3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner3StateChanged
         // TODO add your handling code here:
         int value = (Integer) jSpinner3.getValue();
-        
+
         myController.setBall2xVelocity(value);
 
     }//GEN-LAST:event_jSpinner3StateChanged
@@ -362,7 +374,7 @@ public class View extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-           myController.testTimer.stop();
+        myController.testTimer.stop();
         myController.setBall1PositionX(jSlider1.getValue());
         myController.setBall1PositionY(jSlider2.getValue());
         myController.setBall2PositionX(jSlider3.getValue());
@@ -372,6 +384,12 @@ public class View extends javax.swing.JFrame {
     private void jSlider5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider5StateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jSlider5StateChanged
+
+    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
+        // TODO add your handling code here:
+        int value = (Integer) jSpinner1.getValue();
+        myController.setBall1xVelocity(value);
+    }//GEN-LAST:event_jSpinner1StateChanged
 
     public void setBall1Position(int x, int y) {
         drawingPanel1.setPosition1(x, y);
@@ -392,6 +410,22 @@ public class View extends javax.swing.JFrame {
         jSlider2.setMaximum((int) drawingPanel1.getPanelSize().y);
         jSlider3.setMaximum((int) drawingPanel1.getPanelSize().x);
         jSlider4.setMaximum((int) drawingPanel1.getPanelSize().y);
+
+        jSlider1.setValue(100);
+        jSlider2.setValue(150);
+        jSlider3.setValue((int) (this.getDrawingPanelSize().x * 200) / (300));
+        jSlider4.setValue(150);
+        drawingPanel1.setPosition1(100, 150);
+        drawingPanel1.setPosition2((int) (this.getDrawingPanelSize().x * 200) / (300), 150);
+
+        int value = jSlider1.getValue();
+        myController.setBall1PositionX(value);
+        value = jSlider2.getValue();
+        myController.setBall1PositionY(value);
+        value = jSlider3.getValue();
+        myController.setBall2PositionX(value);
+        value = jSlider4.getValue();
+        myController.setBall2PositionY(value);
     }
 
     /**

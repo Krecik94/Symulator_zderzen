@@ -90,7 +90,6 @@ public class Controller {
     }
 
     public void executeStep() {
-        System.out.println("test");
         world.step(timeStep, velocityIterations, positionIterations);
         Vec2 position1 = ball1.getPosition();
         Vec2 position2 = ball2.getPosition();
@@ -152,6 +151,7 @@ public class Controller {
 
     public void setBall1xVelocity(int velocity) {
         ball1.setLinearVelocity(new Vec2(velocity, 0));
+        System.err.println("Setting ball 1 velocity" +velocity);
     }
 
     public void setBall2xVelocity(int velocity) {

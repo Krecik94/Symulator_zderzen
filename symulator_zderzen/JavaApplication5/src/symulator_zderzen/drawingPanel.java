@@ -37,9 +37,6 @@ public class drawingPanel extends javax.swing.JPanel{
         y1=150;
         x2=300;
         y2=150;
-        
-        
-        
     }
     
     public void setPosition1(int argX, int argY){
@@ -50,6 +47,7 @@ public class drawingPanel extends javax.swing.JPanel{
     }
     
     public void setPosition2(int argX, int argY){
+        System.err.println(""+argX+" "+argY);
         x2=argX;
         y2=argY;
         revalidate();
